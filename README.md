@@ -1,6 +1,6 @@
 # DualDisplayTool
-Tool for lecturers. DualDisplayTool is intended for environments with two screens. The lecture screen (desktop) and the student screen (beamer). The lecture can control what the students see. He can choice between desktop,screenshot, black, extended desktop
-Draw on the desktop and control whether the desktop is shared with the projector.
+Tool for lecturers. DualDisplayTool is intended for environments with two screens. The lecture screen (desktop) and the student screen (beamer). The lecture can control what the students see. He can choice between desktop, screenshot, black and extended desktop.
+Also a screen annotation tool is included.
 
 ### Limitations
 * Desktop switching is based on win32api calls therefore work only in windows
