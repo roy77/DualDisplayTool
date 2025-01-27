@@ -4,7 +4,7 @@ sys.argv.append('build')
 from cx_Freeze import setup, Executable
 # Dependencies are automatically detected, but it might need
 # fine tuning.
-build_options = {'packages': [], 'excludes': [],'build_exe': 'result'}
+build_options = {'packages': [], 'excludes': [],'build_exe': 'dist'}
 
 base = 'gui'
 
@@ -19,4 +19,4 @@ setup(name='DualDisplayTool',
       executables = executables)
 
 import shutil
-shutil.copytree('Icons', 'result/Icons')
+shutil.copytree('Icons', 'dist/Icons')
