@@ -16,9 +16,9 @@ Also a screen annotation tool is included.
   </tr>
   <tr><td>Close Application</td></tr>
   <tr><td>Clone: projector show desktop</td></tr>
-  <tr><td>Screenshot: projector show screenshot of desktop. His desktop is unobserved.</td></tr>
-  <tr><td>Black: projector shows black screen. His desktop is unobserved.</td></tr>
-  <tr><td>Disable: projector shows extended desktop. Lecture can move windows to the desktop. His desktop is unobserved.</td></tr>
+  <tr><td>Screenshot: projector show screenshot of desktop.</td></tr>
+  <tr><td>Black: projector shows black screen.</td></tr>
+  <tr><td>Disable: projector shows extended desktop.</td></tr>
   <tr><td>Toggle suppress sleep mode: Starts active so beamer is allways on</td></tr>
   <tr><td>Paint on screen</td></tr>
   <tr><td></td></tr>
