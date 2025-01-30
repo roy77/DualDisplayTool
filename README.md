@@ -7,6 +7,9 @@ Also a screen annotation tool is included.
 * Tested only on Windows 10
 * Not all controls are scaled by windows resolution, maybe the layout is incorrect at other resolutions. 
 
+### Video
+[![Video](https://img.youtube.com/vi/lr-Dl7sOvUo/0.jpg)](https://www.youtube.com/watch?v=lr-Dl7sOvUo)<br>
+Video with explanations of the functions (only in German).
 
 ### Controls
 <table>
