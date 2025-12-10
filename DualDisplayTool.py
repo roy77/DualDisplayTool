@@ -116,7 +116,8 @@ class Canvas(QLabel):
 
     def draw(self,points):
         if self.mode == self.Mode.DRAW:
-            #self.painter.drawPoint(points)
+            if(self.last_mouse_position==points): 
+                self.painter.drawPoint(points)
             self.painter.drawLine(self.last_mouse_position,points)
             self.update(QRect(self.last_mouse_position, points).normalized().adjusted(-self.drawArea, -self.drawArea, self.drawArea, self.drawArea))
             self.last_mouse_position = points
@@ -169,7 +170,7 @@ class Canvas(QLabel):
                 if(pen is not None):
                     painter.setPen(pen)
                     if(len(self.objectsArray[i]["pos"])==1):
-                        painter.drawLine(self.objectsArray[i]["pos"][0],self.objectsArray[i]["pos"][0])
+                        painter.drawPoint(self.objectsArray[i]["pos"][0])
                     else: painter.drawPolyline(self.objectsArray[i]["pos"])
         except Exception as err:
             print(Exception, err)
