@@ -4,7 +4,7 @@ Also a screen annotation tool is included.
 
 ### Limitations
 * Desktop switching is based on win32api calls therefore work only in windows
-* Tested only on Windows 10
+* Tested on Windows 10/11
 * Not all controls are scaled by windows resolution, maybe the layout is incorrect at other resolutions. 
 
 ### Video
