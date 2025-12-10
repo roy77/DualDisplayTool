@@ -8,6 +8,7 @@ from PyQt5.QtGui import QGuiApplication,QPixmap,QImage,QIcon,QPainter,QPen,QColo
 from PyQt5.QtSvg import QSvgRenderer
 from enum import Enum
 
+
 class WinDLL():
     SDC_APPLY = 0x00000080
     SDC_TOPOLOGY_CLONE = 0x00000002
@@ -82,9 +83,10 @@ class Canvas(QLabel):
                 self.screenshotPixmap=self.parent.window().windowHandle().screen().grabWindow(0)
             elif self.mode==self.Mode.DRAW:
                 self.addObject({
-                    "pen":QPen(self.pen_color,self.pen_width*self.scale),
+                    "pen":QPen(self.pen_color,self.pen_width*self.scale, Qt.SolidLine, Qt.RoundCap, Qt.RoundJoin),
                     "pos":QPolygon([])
                     })
+                self.drawArea= int(self.pen_width*self.scale)+5
                 self.painter = QPainter(self.pixmap)
                 self.painter.setPen( self.objectsArray[-1]["pen"])
 
@@ -110,10 +112,13 @@ class Canvas(QLabel):
             del self.screenshotPixmap
         elif self.mode==self.Mode.DRAW:
             self.painter.end()
+            self.update()
 
     def draw(self,points):
         if self.mode == self.Mode.DRAW:
+            #self.painter.drawPoint(points)
             self.painter.drawLine(self.last_mouse_position,points)
+            self.update(QRect(self.last_mouse_position, points).normalized().adjusted(-self.drawArea, -self.drawArea, self.drawArea, self.drawArea))
             self.last_mouse_position = points
             self.objectsArray[-1]["pos"].append(points)
         elif self.mode == self.Mode.ERASE:
@@ -127,12 +132,13 @@ class Canvas(QLabel):
             self.pixmapIndex-=len(res)
             for ele in res: self.objectsArray.remove(ele)
             self.changePixmap()
+            self.update()
         elif self.mode == self.Mode.SCREENSHOT:
             self.changePixmap()
             painter = QPainter(self.pixmap)
             painter.setPen(QPen(QColor(255, 0, 0), self.width_base/2, Qt.DashLine))
             painter.drawRect(self.RectFromPoints(self.last_mouse_position,points))
-        self.update()
+            self.update()
 
     def undo(self):
         if(self.pixmapIndex>0): 
@@ -184,7 +190,8 @@ class Canvas(QLabel):
         painter.end()
 
     def lineWidth(self,value):
-        self.scale=(1+value/2)*self.scale
+        if value>0: self.scale=1.5*self.scale
+        else:  self.scale=1/1.5*self.scale
         return "{:.2f}".format(self.scale)
     
     def setColor(self,color):
@@ -220,6 +227,14 @@ class TransparentWidget(QWidget):
 
         self.transparent=transparent
         self.setFlags()
+
+    def keyPressEvent(self, event):
+        self.parent.btntogglePaint.setChecked(False)
+        self.parent.btntoggleErase.setChecked(False)
+        self.setMode(True, False) # Paint True, State False
+        QApplication.restoreOverrideCursor()
+            
+        super().keyPressEvent(event)
 
     def setScreen(self):
         screen_geometry = self.parent.window().windowHandle().screen().geometry()
